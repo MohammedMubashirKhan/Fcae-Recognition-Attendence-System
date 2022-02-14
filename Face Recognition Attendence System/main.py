@@ -1,4 +1,5 @@
 import cv2
+from cv2 import destroyWindow
 import medoapipe_face_mesh
 
 
@@ -21,7 +22,7 @@ while(True):
 
 
     
-    frame = localMP.drawFaceMesh(frame, face_meshs_custom_landmarks=face_meshs_custom_landmarks)
+    frame = localMP.drawFaceMeshPoints(frame, face_meshs_custom_landmarks=face_meshs_custom_landmarks)
 
     faceLocation = localMP.extractFace(face_meshs_custom_landmarks=face_meshs_custom_landmarks)
     
@@ -31,9 +32,16 @@ while(True):
     
     
     
-    
+    # If face is present in an Image the this will croped face and display in other window
+    # and if face is out of frame then it will destroy the croped window
     if faceLocation:
         face1 = faceLocation[0]
         cv2.imshow("Croped", frame[face1[1]:face1[3],face1[0]:face1[2]])
+    else:
+        try:
+            cv2.destroyWindow(winname="Croped")
+        except:
+            pass
+    
     cv2.imshow("frame", frame)
     cv2.waitKey(1)

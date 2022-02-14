@@ -32,7 +32,7 @@ class FaceMesh:
     
 
     # Drawing all point on a face in an image provided to function
-    def drawFaceMesh(self, image, face_meshs_custom_landmarks):
+    def drawFaceMeshPoints(self, image, face_meshs_custom_landmarks):
   
         for face in face_meshs_custom_landmarks:
             for origin in face:
